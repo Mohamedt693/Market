@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import { AppContextProvider } from "@/context/AppContext";
 import "./globals.css";
@@ -6,16 +5,12 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 const outfit = Outfit({ subsets: ['latin'], weight: ["300", "400", "500"] })
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Market",
   description: "E-commerce project",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({children}) {
   return (
     <ClerkProvider>
     <html lang="en">

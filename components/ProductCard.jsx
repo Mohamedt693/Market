@@ -3,19 +3,8 @@ import Image from 'next/image'
 import { assets } from '@/assets/assets'
 import { useAppContext } from '@/context/AppContext';
 
-type ProductType = {
-    _id: string;
-    name: string;
-    description: string;
-    image: string[];
-    offerPrice: number;
-};
 
-type Props = {
-    product: ProductType;
-};
-
-function ProductCard({product}: Props) {
+function ProductCard({product}) {
     const { currency, router } = useAppContext()
     return (
         <div 

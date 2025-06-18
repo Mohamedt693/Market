@@ -36,7 +36,7 @@ function HeaderSlider() {
   const [isDragging, setIsDragging] = useState(false)
   const [startX, setStartX] = useState(0)
   const [translateX, setTranslateX] = useState(0)
-  const sliderRef = useRef<HTMLDivElement | null>(null)
+  const sliderRef = useRef(null)
 
     // ✅ auto slide
     useEffect(() => {
@@ -48,17 +48,17 @@ function HeaderSlider() {
     }, [sliderData.length, isDragging])
 
     // manual change
-    const handleSlideChange = (index: number) => {
+    const handleSlideChange = (index) => {
         setCurrentSlide(index)
     }
 
     // Mouse drag handlers
-    const handleMouseDown = (e: React.MouseEvent) => {
+    const handleMouseDown = (e) => {
         setIsDragging(true)
         setStartX(e.clientX)
     }
 
-    const handleMouseMove = (e: React.MouseEvent) => {
+    const handleMouseMove = (e) => {
         if (!isDragging) return
         const x = e.clientX
         const diff = x - startX
@@ -70,12 +70,12 @@ function HeaderSlider() {
     }
 
     // Touch handlers
-    const handleTouchStart = (e: React.TouchEvent) => {
+    const handleTouchStart = (e) => {
         setIsDragging(true)
         setStartX(e.touches[0].clientX)
     }
 
-    const handleTouchMove = (e: React.TouchEvent) => {
+    const handleTouchMove = (e) => {
         if (!isDragging) return
         const x = e.touches[0].clientX
         const diff = x - startX

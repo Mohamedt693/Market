@@ -10,15 +10,7 @@ import Loading from "@/components/Loading";
 import { useAppContext } from "@/context/AppContext";
 import React from "react";
 
-type ProductType = {
-  _id: string;
-  name: string;
-  description: string;
-  category: string;
-  price: number;
-  offerPrice: number;
-  image: string[];
-};
+
 
 const Product = () => {
     const {id} = useParams();
