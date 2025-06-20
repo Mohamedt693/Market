@@ -29,7 +29,7 @@ function Navbar() {
             </div>
             <ul className='hidden md:flex items-center gap-4'>
                 <Image src={assets.search_icon} alt='search' className='w-4 h-4'/>
-                {user ?
+                {user && user.isSignedIn ?
                 <>
                 <UserButton>
                     <UserButton.MenuItems>
