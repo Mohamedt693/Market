@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import Loading from "@/components/Loading";
 import { useAppContext } from "@/context/AppContext";
 import React from "react";
+import { ToastContainer } from "react-toastify";
 
 
 
@@ -17,8 +18,8 @@ const Product = () => {
 
     const { products, router, addToCart } = useAppContext()
 
-    const [mainImage, setMainImage] = useState<string | null>(null);
-    const [productData, setProductData] = useState<ProductType | null>(null);
+    const [mainImage, setMainImage] = useState(null);
+    const [productData, setProductData] = useState(null);
 
     const fetchProductData = async () => {
         const product = products.find(product => product._id === id);
@@ -31,6 +32,7 @@ const Product = () => {
 
     return productData ? (
         <>
+        <ToastContainer />
         <Navbar />
         <div className="px-6 md:px-16 lg:px-32 pt-14 space-y-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16">

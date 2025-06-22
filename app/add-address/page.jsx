@@ -4,8 +4,16 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import { useState } from "react";
+import { useAppContext } from "@/context/AppContext";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const AddAddress = () => {
+
+    const {getToken, router} = useAppContext()
 
     const [address, setAddress] = useState({
         fullName: '',
@@ -19,10 +27,25 @@ const AddAddress = () => {
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
+        try {
+            const token = await getToken()
+            console.log(token)
+            const {data} = await axios.post('/api/user/add-address',{address}, {headers: {Authorization: `Bearer ${token}`}})
+            if(data.success){
+                toast.success('address added successfuly')
+                router.push('/cart')
+            }else {
+                toast.error(data.message)
+                console.log('eeee')
+            }
+        } catch (error) {
+                toast.error(error.message)
+        }
     }
 
     return (
         <>
+            <ToastContainer />
             <Navbar />
             <div className="px-6 md:px-16 lg:px-32 py-16 flex flex-col md:flex-row justify-between">
                 <form onSubmit={onSubmitHandler} className="w-full">

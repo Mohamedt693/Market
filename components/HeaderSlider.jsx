@@ -131,7 +131,7 @@ return (
                         </button>
                         <button className="group flex items-center gap-2 px-6 py-2.5 font-medium">
                             {slide.buttonText2}
-                            <Image className="group-hover:translate-x-1 transition" src={assets.arrow_icon} alt='arrow' width={16} height={16} />
+                            <Image className="group-hover:translate-x-1 transition w-auto h-auto" src={assets.arrow_icon} alt='arrow' width={16} height={16} />
                         </button>
                     </div>
                 </div>

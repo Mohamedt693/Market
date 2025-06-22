@@ -4,22 +4,38 @@ import { assets, productsDummyData } from "@/assets/assets";
 import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
 import Loading from "@/components/Loading";
+import { toast } from "react-toastify";
+import axios from "axios";
+
+
 
 const ProductList = () => {
 
-  const { router } = useAppContext()
+  const { router, getToken, user } = useAppContext()
 
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
 
   const fetchSellerProduct = async () => {
-    setProducts(productsDummyData)
-    setLoading(false)
+    try {
+        const token = await getToken()
+        const {data} = await axios.get('/api/product/seller-list',{headers: {Authorization: `Bearer ${token}`}})
+        if(data.success){
+          setProducts(data.products)
+          setLoading(false)
+        } else {
+            toast.error("لم يتم اضافة المنتج");
+        }
+    } catch (error) {
+        toast.error(error.message)
+    }
   }
 
   useEffect(() => {
-    fetchSellerProduct();
-  }, [])
+    if(user){
+      fetchSellerProduct();
+    }
+  }, [user])
 
   return (
     <div className="flex-1 min-h-screen flex flex-col justify-between">

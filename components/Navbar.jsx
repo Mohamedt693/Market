@@ -8,7 +8,7 @@ import { useClerk, UserButton } from '@clerk/nextjs'
 
 
 function Navbar() {
-    const { isSeller, router, user } = useAppContext();
+    const { isSeller, router, user, isSignedIn } = useAppContext();
     const {openSignIn} = useClerk();
 
 
@@ -29,7 +29,7 @@ function Navbar() {
             </div>
             <ul className='hidden md:flex items-center gap-4'>
                 <Image src={assets.search_icon} alt='search' className='w-4 h-4'/>
-                {user && user.isSignedIn ?
+                {user && isSignedIn ?
                 <>
                 <UserButton>
                     <UserButton.MenuItems>
@@ -49,7 +49,7 @@ function Navbar() {
             </ul>
             <div className='flex items-center gap-3 md:hidden'>
                 {isSeller && <button onClick={() => router.push('/seller')} className="text-xs border px-4 py-1.5 rounded-full">Seller Dashboard</button>}
-                { user ? 
+                { user && isSignedIn ? 
                 <>
                 <UserButton>
                     <UserButton.MenuItems>
